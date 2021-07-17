@@ -5,7 +5,8 @@
 
 #define MAX 10000
 
-//função itoa que transforma int em string
+//função itoa que transforma int em string TALVEZ EU RETIRE PARA USAR SPRINTF
+
 char *itoa(int i, char b[])
 {
     char const digit[] = "0123456789";
@@ -30,13 +31,15 @@ char *itoa(int i, char b[])
     return b;
 }
 
-void *rotina(void *str)
+void *rotina(void *arg)
 {
-    char *string = str;
-    printf("Olá, eu sou a %s de id %u \n", string, pthread_self());
+    char *string = (char *) arg;
+    printf("Olá, eu sou a %s de id %lu \n", string, pthread_self());
+    
 }
 
-int main(int argc, char *argv[])
+/*
+int main2(int argc, char *argv[])
 {
     int n;
     pthread_t threads[MAX];
@@ -74,4 +77,32 @@ int main(int argc, char *argv[])
 
 
     return 0;
+}
+*/
+int main()
+{
+    int n;
+    pthread_t threads[MAX];
+    char names[10][MAX];
+    printf("Digite a quantidade desejada de threads = ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++)
+    {
+        char name_thread[] = "Thread_";
+        char number_thread[MAX];
+        sprintf(number_thread, "%d", i + 1);
+        strcat(name_thread, number_thread);
+        char *pnameThread = name_thread;
+        strcpy(names[i], pnameThread);
+
+    }
+    
+    for (int i = 0; i < n; i++)
+    {
+       
+        char *name_to_thread = names[i];
+        pthread_create(&threads[i], NULL, rotina, (void *)name_to_thread);
+    }
+    
 }
