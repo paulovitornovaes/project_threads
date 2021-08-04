@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <unistd.h>
 #include <semaphore.h>
 #define MAX 5
@@ -42,52 +45,46 @@ void *imprime_vetor(struct vetor_dados vetor_inteiros)
 
 int main()
 {
-    
+
     printf("iniciando o programa...\n");
     struct vetor_dados vetor_inteiros;
     vetor_inteiros.tamanho = MAX;
     gera_vetor_random(vetor_inteiros.vetor);
 
-    int id = fork();
-    sem_init(&semaphore,0,1);
-    if (id == 0)
+    //int id = fork();
+    //sem_init(&semaphore, 0, 1);
+
+    printf("entrando no processo filho...(remove pares)\n");
+    for (int i = 0; i < vetor_inteiros.tamanho; i++)
     {
-        printf("entrando no processo filho...(remove pares)\n");
-        for (int i = 0; i < vetor_inteiros.tamanho; i++)
+        //sem_wait(&semaphore);
+        if (vetor_inteiros.vetor[i] % 2 == 0)
         {
-            sem_wait(&semaphore);
-            if (vetor_inteiros.vetor[i] % 2 == 0)
+            for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
             {
-                for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
-                {
-                    vetor_inteiros.vetor[j] = vetor_inteiros.vetor[j + 1];
-                }
-                vetor_inteiros.tamanho--;
-                i--;
+                vetor_inteiros.vetor[j] = vetor_inteiros.vetor[j + 1];
             }
-            sem_post(&semaphore);
+            vetor_inteiros.tamanho--;
+            i--;
         }
+        //sem_post(&semaphore);
     }
 
-    else
+    printf("entrando no processo pai...(remove multiplos de 5)\n");
+    for (int i = 0; i < vetor_inteiros.tamanho; i++)
     {
+        //sem_wait(&semaphore);
 
-        printf("entrando no processo pai...(remove multiplos de 5)\n");
-        for (int i = 0; i < vetor_inteiros.tamanho; i++)
+        if (vetor_inteiros.vetor[i] % 5 == 0)
         {
-            sem_wait(&semaphore);
-
-            if (vetor_inteiros.vetor[i] % 5 == 0)
+            for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
             {
-                for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
-                {
-                    vetor_inteiros.vetor[j] = vetor_inteiros.vetor[j + 1];
-                }
-                vetor_inteiros.tamanho--;
-                i--;
+                vetor_inteiros.vetor[j] = vetor_inteiros.vetor[j + 1];
             }
-            sem_post(&semaphore);
+            vetor_inteiros.tamanho--;
+            i--;
         }
+        //sem_post(&semaphore);
     }
 
     imprime_vetor(vetor_inteiros);
