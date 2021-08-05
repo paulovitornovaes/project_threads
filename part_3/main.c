@@ -6,8 +6,9 @@
 #include <sys/shm.h>
 #include <sys/wait.h>
 #include <sys/ipc.h>
+//#include <math.h>
 
-#define MAX 5
+#define MAX 100000
 
 struct shmid_ds buf;
 
@@ -22,15 +23,16 @@ void *gera_vetor_random(int *vetor_inteiros)
     //chamada do srand para auxiliar na criação de numeros randomicos
     srand(time(NULL));
     //looping de indice 0 até o valor MAX
-    printf("Vetor com 100000 inteiros ->\n");
+
+    //printf("Vetor com 100000 inteiros ->\n");
     for (int i = 0; i < MAX; i++)
     {
         //vetor de inteiros recebe o numero aleatorio de 0 a 100
         vetor_inteiros[i] = rand() % 100 + 1;
 
-        printf("[%d]\n", vetor_inteiros[i]);
+        //printf("[%d]\n", vetor_inteiros[i]);
     }
-    printf("\n");
+    //printf("\n");
 
     return NULL;
 }
@@ -41,6 +43,29 @@ void *imprime_vetor(struct vetor_dados vetor_inteiros)
     {
         printf("[%d]\n", vetor_inteiros.vetor[i]);
     }
+}
+
+void *compara_vetor(struct vetor_dados *vetor_inteiros_comparador, struct vetor_dados *vetor_inteiros)
+{
+    int key = 0;
+    if (vetor_inteiros_comparador->tamanho == vetor_inteiros->tamanho)
+    {
+        for (int i = 0; i < vetor_inteiros_comparador->tamanho; i++)
+        {
+            if (vetor_inteiros_comparador->vetor[i] != vetor_inteiros->vetor[i])
+            {
+                key += 1;
+            }
+        }
+    }
+    else
+    {
+        printf("thread -> %d sequencial -> %d\n", vetor_inteiros_comparador->tamanho, vetor_inteiros->tamanho);
+    }
+
+    printf("Foram encontrados %d diferenças entre os vetores\n", key);
+
+    return NULL;
 }
 
 void *remove_par(struct vetor_dados *vetor_inteiros)
@@ -85,9 +110,25 @@ void *remove_mul_cinco(struct vetor_dados *vetor_inteiros)
     return NULL;
 }
 
+void *remove_mul_par(struct vetor_dados *vetor_inteiros)
+{
+    for (int i = 0; i < vetor_inteiros->tamanho; i++)
+    {
+        if ((vetor_inteiros->vetor[i] % 5 == 0) || (vetor_inteiros->vetor[i] % 2 == 0))
+        {
+            for (int j = i + 1; j < vetor_inteiros->tamanho; j++)
+            {
+                vetor_inteiros->vetor[j - 1] = vetor_inteiros->vetor[j];
+            }
+            i--;
+            vetor_inteiros->tamanho--;
+        }
+    }
+}
+
 int main()
 {
-    
+
     printf("iniciando o programa...\n");
 
     // --------------------  Criação dos structs usados ----------------- //
@@ -99,21 +140,20 @@ int main()
     pvetor_inteiros = &vetor_inteiros;
 
     gera_vetor_random(vetor_inteiros.vetor);
-    
-    //Fazendo uma cópia do vetor_inteiros para vetor que vamos usar sem processos
-    struct vetor_dados compara_vetor_inteiros;
-    compara_vetor_inteiros = vetor_inteiros;
 
+    //Fazendo uma cópia do vetor_inteiros para vetor que vamos usar sem processos
+    struct vetor_dados *compara_vetor_inteiros;
+    compara_vetor_inteiros = &vetor_inteiros;
+
+    remove_mul_par(compara_vetor_inteiros);
 
     // ----------------------------------------------------------------- //
 
-
     // -------------------- Uso da memória compartilhada ----------------- //
 
-    int shmid = shmget(0, 100000 * sizeof(int), 0666 | IPC_CREAT);
-    //criado a área da memória compartilhada com key 0
-    //área alocada foi de 100000 pensado para tamanho do inteiro
+    int shmid = shmget(0, 100000 * sizeof(int), 0666 | IPC_CREAT); //criado a área da memória compartilhada com key 0 / área alocada foi de 100000 pensado para tamanho do inteiro
     // EXPLICAR FLAGS 0666 IPC_CREAT
+
     if (shmid < 0)
     {
         perror("shmget error");
@@ -121,12 +161,13 @@ int main()
 
     struct vetor_dados *compartilhado = shmat(shmid, NULL, 0);
     //criando a struct vetor_dados para receber esse espaço de memória partilhada
+
     *compartilhado = vetor_inteiros;
     //meu struct vetor_inteiros está agora na área da memória partilhada
 
-    int id = fork();
+    int id;
 
-    if (id < 0)
+    if ((id = fork()) < 0)
     {
         printf("Erro no fork!\n");
         exit(1);
@@ -135,21 +176,20 @@ int main()
     if (id == 0)
     {
         remove_par(compartilhado);
-        // talvez jogue o exit 0 aqui ;;;;;;;;;;;;;;;;;;;;;;;;;
+        exit(1);
     }
-    else{
+    else
+    {
+        
         wait(NULL);
         remove_mul_cinco(compartilhado);
-        
+        compara_vetor(compartilhado, compara_vetor_inteiros);
     }
-    
 
-    remove_par(pvetor_inteiros);
-    imprime_vetor(vetor_inteiros);
-    
-    remove_mul_cinco(pvetor_inteiros);
-    imprime_vetor(vetor_inteiros);
-    
-    
+    if ((shmid, IPC_RMID, &buf) == -1)
+    {
+        perror("main: shmctl: ");
+    }
+
     return 0;
 }
