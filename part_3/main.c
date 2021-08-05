@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <pthread.h>
 #include <stdlib.h>
 #include <time.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
 #include <unistd.h>
-#include <semaphore.h>
+#include <sys/types.h>
+#include <sys/shm.h>
+#include <sys/wait.h>
+#include <sys/ipc.h>
+
 #define MAX 5
-sem_t semaphore;
+
+struct shmid_ds buf;
 
 struct vetor_dados
 {
@@ -43,52 +43,113 @@ void *imprime_vetor(struct vetor_dados vetor_inteiros)
     }
 }
 
+void *remove_par(struct vetor_dados *vetor_inteiros)
+{
+    int maximo = vetor_inteiros->tamanho;
+
+    //looping reverso
+    for (int i = maximo - 1; i >= 0; i--)
+    {
+        if (vetor_inteiros->vetor[i] % 2 == 0)
+        {
+            for (int j = i; j < maximo; j++)
+            {
+                vetor_inteiros->vetor[j] = vetor_inteiros->vetor[j + 1];
+            }
+            maximo--;
+        }
+    }
+    vetor_inteiros->tamanho = maximo;
+
+    return NULL;
+}
+
+void *remove_mul_cinco(struct vetor_dados *vetor_inteiros)
+{
+    int maximo = vetor_inteiros->tamanho;
+    //looping reverso
+    for (int i = maximo - 1; i >= 0; i--)
+    {
+        if (vetor_inteiros->vetor[i] % 5 == 0)
+        {
+
+            for (int j = i; j < maximo; j++)
+            {
+                vetor_inteiros->vetor[j] = vetor_inteiros->vetor[j + 1];
+            }
+            maximo--;
+        }
+    }
+    vetor_inteiros->tamanho = maximo;
+
+    return NULL;
+}
+
 int main()
 {
-
+    
     printf("iniciando o programa...\n");
+
+    // --------------------  Criação dos structs usados ----------------- //
+
     struct vetor_dados vetor_inteiros;
     vetor_inteiros.tamanho = MAX;
+
+    struct vetor_dados *pvetor_inteiros;
+    pvetor_inteiros = &vetor_inteiros;
+
     gera_vetor_random(vetor_inteiros.vetor);
+    
+    //Fazendo uma cópia do vetor_inteiros para vetor que vamos usar sem processos
+    struct vetor_dados compara_vetor_inteiros;
+    compara_vetor_inteiros = vetor_inteiros;
 
-    //int id = fork();
-    //sem_init(&semaphore, 0, 1);
 
-    printf("entrando no processo filho...(remove pares)\n");
-    for (int i = 0; i < vetor_inteiros.tamanho; i++)
+    // ----------------------------------------------------------------- //
+
+
+    // -------------------- Uso da memória compartilhada ----------------- //
+
+    int shmid = shmget(0, 100000 * sizeof(int), 0666 | IPC_CREAT);
+    //criado a área da memória compartilhada com key 0
+    //área alocada foi de 100000 pensado para tamanho do inteiro
+    // EXPLICAR FLAGS 0666 IPC_CREAT
+    if (shmid < 0)
     {
-        //sem_wait(&semaphore);
-        if (vetor_inteiros.vetor[i] % 2 == 0)
-        {
-            for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
-            {
-                vetor_inteiros.vetor[j] = vetor_inteiros.vetor[j + 1];
-            }
-            vetor_inteiros.tamanho--;
-            i--;
-        }
-        //sem_post(&semaphore);
+        perror("shmget error");
     }
 
-    printf("entrando no processo pai...(remove multiplos de 5)\n");
-    for (int i = 0; i < vetor_inteiros.tamanho; i++)
-    {
-        //sem_wait(&semaphore);
+    struct vetor_dados *compartilhado = shmat(shmid, NULL, 0);
+    //criando a struct vetor_dados para receber esse espaço de memória partilhada
+    *compartilhado = vetor_inteiros;
+    //meu struct vetor_inteiros está agora na área da memória partilhada
 
-        if (vetor_inteiros.vetor[i] % 5 == 0)
-        {
-            for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
-            {
-                vetor_inteiros.vetor[j] = vetor_inteiros.vetor[j + 1];
-            }
-            vetor_inteiros.tamanho--;
-            i--;
-        }
-        //sem_post(&semaphore);
+    int id = fork();
+
+    if (id < 0)
+    {
+        printf("Erro no fork!\n");
+        exit(1);
     }
 
+    if (id == 0)
+    {
+        remove_par(compartilhado);
+        // talvez jogue o exit 0 aqui ;;;;;;;;;;;;;;;;;;;;;;;;;
+    }
+    else{
+        wait(NULL);
+        remove_mul_cinco(compartilhado);
+        
+    }
+    
+
+    remove_par(pvetor_inteiros);
     imprime_vetor(vetor_inteiros);
-    sem_destroy(&semaphore);
-
+    
+    remove_mul_cinco(pvetor_inteiros);
+    imprime_vetor(vetor_inteiros);
+    
+    
     return 0;
 }

@@ -86,7 +86,7 @@ int main()
         printf("entrando no processo filho id %d...(remove pares)\n", id);
         for (int i = 0; i < memoria_partilhada->tamanho; i++)
         {
-            sem_wait(&semaphore);
+
             if (memoria_partilhada->vetor[i] % 2 == 0)
             {
                 for (int j = i; j < vetor_inteiros.tamanho - 1; j++)
@@ -96,7 +96,6 @@ int main()
                 memoria_partilhada->tamanho--;
                 i--;
             }
-            sem_post(&semaphore);
         }
     }
 
@@ -106,7 +105,6 @@ int main()
         printf("entrando no processo pai id %d...(remove multiplos de 5)\n", id);
         for (int i = 0; i < vetor_inteiros.tamanho; i++)
         {
-            sem_wait(&semaphore);
 
             if (memoria_partilhada->vetor[i] % 5 == 0)
             {
@@ -117,7 +115,6 @@ int main()
                 memoria_partilhada->tamanho--;
                 i--;
             }
-            sem_post(&semaphore);
         }
     }
 
@@ -132,6 +129,6 @@ int main()
         perror("main: shmctl: ");
         exit(1);
     }
-    
+
     return 0;
 }
