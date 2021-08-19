@@ -4,6 +4,7 @@
 #include <time.h>
 #include <semaphore.h>
 #define MAX 100000
+
 sem_t semaphore;
 
 struct vetor_dados
