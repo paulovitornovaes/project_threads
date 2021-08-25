@@ -96,6 +96,9 @@ Isso é necessário pois a proxima região vai entrar na região critica também
  Definimos 3 structs e seus devidos ponteiros, a primeira é para o uso das funções sequenciais, a segunda é para
  threads com semáforos e a terceira é para o vetor comparador, para isso precisamos de um vetor_inteiros original, o original vai receber valores aleatorios com a função gera_vetor_random, e essas outras structs vão receber o vetor_original.
  
+ RESPOSTA DO DESAFIO = Teste o programa com e sem semáforos (ambos com threads), observe o resultado e explique o que está acontecendo.
+
+Caso não seja utilizado os semáforos você irá notar que em algum momento o algoritmo de compara_vetor vai apresentar inconsistencias com o vetor original, isso ocorre pois ambas threads executam as rotinas entrando na região crítica ao mesmo tempo, como o algoritmo de remover pares ou múltiplos de 5 vão verificar e remover ao mesmo tempo, em algum momento uma das funções vai analisar um caso que já tenha sido removido pelo outro, por isso a necessidade de exclusão mútua nesse cenário é vital.
 
  
  
