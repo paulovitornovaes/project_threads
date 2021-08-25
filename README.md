@@ -15,4 +15,11 @@
 | Código  | Explicação  |
 |---|---|
 | ![final](https://github.com/paulovitornovaes/project_threads/blob/59942b31e1534f6e53c80c52751d1bc6099857ec/part_1/assets/final_loop.png)  | <ul> <li>Laço de 0 até o input do usuário.</li> <li>ponteiro que aponta para os nomes das threads já criados</li> <li>função pthread_create</li> </ul>  |
-|---|---|
+
+
+Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos lá:
+
+Primeiro parametro se refere a onde a thread será armazenada, no começo do código criamos o vetor do tipo pthread para essa ocasião.
+Segundo parametro não é necessário para nossa implementação então o valor recebido é NULL
+Terceiro parametro é a rotina que a thread irá executar, como o desafio era imprimir Olá sou a thread_X iremos implementar essa função.
+Quarto parametro é referente aos argumentos que a rotina terá, obrigatoriamente a rotina é tipo void, como nossa thread é tipo string precisamos fazer um typecast para passar, chegando na rotina devemos novamente fazer o typecast, mas dessa vez o argumento deve receber type string.
