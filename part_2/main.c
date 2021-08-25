@@ -17,18 +17,13 @@ struct vetor_dados
 
 void *gera_vetor_random(int *vetor_inteiros)
 {
-    //chamada do srand para auxiliar na criação de numeros randomicos
     srand(time(NULL));
-    //looping de indice 0 até o valor MAX
 
     for (int i = 0; i < MAX; i++)
     {
-        //vetor de inteiros recebe o numero aleatorio de 0 a 100
         vetor_inteiros[i] = rand() % 100 + 1;
 
-        //printf("[%d]\n", vetor_inteiros[i]);
     }
-    //printf("\n");
 
     return NULL;
 }
@@ -60,7 +55,7 @@ void *compara_vetor(struct vetor_dados *vetor_inteiros_comparador, struct vetor_
     {
         printf("thread -> %d sequencial -> %d\n", vetor_inteiros_comparador->tamanho, vetor_inteiros_thread_sem->tamanho);
     }
-
+    
     printf("Foram encontrados %d diferenças entre os vetores\n", key);
 
     return NULL;
@@ -68,13 +63,14 @@ void *compara_vetor(struct vetor_dados *vetor_inteiros_comparador, struct vetor_
 
 // --------------------------------------------------------- //
 
+
+
 //                         FUNÇÕES SEQUENCIAIS                //
 
 void *remove_par(struct vetor_dados *vetor_inteiros)
 {
     int maximo = vetor_inteiros->tamanho;
 
-    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         if (vetor_inteiros->vetor[i] % 2 == 0)
@@ -94,7 +90,6 @@ void *remove_par(struct vetor_dados *vetor_inteiros)
 void *remove_mul_cinco(struct vetor_dados *vetor_inteiros)
 {
     int maximo = vetor_inteiros->tamanho;
-    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         if (vetor_inteiros->vetor[i] % 5 == 0)
@@ -113,6 +108,8 @@ void *remove_mul_cinco(struct vetor_dados *vetor_inteiros)
 }
 
 // --------------------------------------------------------- //
+
+
 
 //FUNÇÕES COM USO DE THREAD E SEMÁFORO //
 
@@ -141,7 +138,6 @@ void *remove_mul_cinco_thread_sem(void *arg)
 {
     struct vetor_dados *arg_dados = (struct vetor_dados *)arg;
     int maximo = arg_dados->tamanho;
-    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         sem_wait(&semaphore);
@@ -161,6 +157,7 @@ void *remove_mul_cinco_thread_sem(void *arg)
     return NULL;
 }
 // ---------------------------------- //
+
 
 int main()
 {
@@ -184,6 +181,7 @@ int main()
 
     printf("Caso necessite de imprimir os valores, use a função imprime_vetor()\nIniciando programa...\n");
 
+
     //                  IMPLEMENTAÇÃO THREAD - SEMAFORO                     //
 
     t_thread_sem = clock();
@@ -205,6 +203,7 @@ int main()
 
     //                  IMPLEMENTAÇÃO SEQUENCIAL                           //
 
+
     t_sequencial = clock();
 
     remove_par(pvetor_sequencial);
@@ -215,6 +214,8 @@ int main()
     // -------------------------------------------------------------------- //
 
     sem_destroy(&semaphore);
+
+
 
     for (int i = 0; i < vetor_comparador.tamanho; i++)
     {
@@ -229,6 +230,7 @@ int main()
         }
     }
 
+    
     compara_vetor(pvetor_comparador, pvetor_thread_sem);
 
     return 0;
