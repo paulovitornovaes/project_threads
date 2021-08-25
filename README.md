@@ -58,18 +58,44 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
  
 |  Código | Explicação  |
 |---|---|
-|Função sequencial | função remove_par sequencial|
+|Função sequencial | função remove_par sequencial.|
  
 Função que recebe como parametro um tipo vetor_dados e em um laço de repetição procura por pares, caso encontrado outro laço será utilizado para organizar as posições sem esse número par encontrado.
  
  
 |  Código | Explicação  |
 |---|---|
-|Função sequencial2 | função remove_mul_cinco sequencial|
+|Função sequencial2 | função remove_mul_cinco sequencial.|
  
 Funciona da mesma forma que o anterior, mas dessa vez remove os múltiplos de 5.
  
  
 |  Código | Explicação  |
 |---|---|
-|Função sequencial2 | função remove_mul_cinco sequencial|
+|Função com thread e semaforo | função remove par com threads e semáforos.|
+ 
+ 
+ Essa função tem como o mesmo objetivo da anterior, remover os pares, a diferença aqui é o uso de threads e semáforos, para ser uma rotina da thread a gente coloca como parametro o argumento tipo void.
+ Dentro do laço, antes de verificar se o número é divisivel por 2 nós colocamos o sem_wait(&semaphore), que é a condição de parada dos semáforos.
+ Depois da verificação ocorre a condição de corrida.
+Isso é necessário pois a proxima região vai entrar na região critica também, então primeiro uma função entra, depois outra função entra, chamamos isso de exclusão mútua.
+ 
+ |  Código | Explicação  |
+|---|---|
+|Função com thread e semaforo 2 | função remove múltiplos de 5 com threads e semáforos.|
+ 
+ Funciona da mesma forma que o anterior, removendo múltiplos de 5 e garantindo a exclusão mútua graças ao sem_wait antes de entrar na região crítica e sem_post após terminar o acesso a região crítica.
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main1 | Vamos usar as funções.|
+ 
+ 
+ Definimos duas threads para o uso das rotinas remover multiplos de 5 e remover pares.
+ Definimos o tipo clock_t para calcular o tempo de execução da função sequencial e da função com uso de threads e semáforos.
+ Definimos 3 structs e seus devidos ponteiros, a primeira é para o uso das funções sequenciais, a segunda é para
+ threads com semáforos e a terceira é para o vetor comparador, para isso precisamos de um vetor_inteiros original, o original vai receber valores aleatorios com a função gera_vetor_random, e essas outras structs vão receber o vetor_original.
+ 
+
+ 
+ 
