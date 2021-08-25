@@ -47,7 +47,8 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
  
  Função auxiliar que vai gerar um vetor com números randomizados. estamos usando a função srand com a função time para gerar esses números.
  
- 
+|  Código | Explicação  |
+|---|---|
 | Função auxiliar 2| Função imprime vetores. |
 | Função compara vetores | Função compara vetores  |
  
