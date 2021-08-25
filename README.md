@@ -41,4 +41,96 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |  Código | Explicação  |
 |---|---|
  |![libs](https://github.com/paulovitornovaes/project_threads/blob/13547fe0819719d092839682126f262d90daa810/part_2/assets/library.png)| bibliotecas necessárias. |
+ |struct |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
+ | função auxiliar  | Função gera vetores. |
+ 
+ 
+ Função auxiliar que vai gerar um vetor com números randomizados. estamos usando a função srand com a função time para gerar esses números.
+ 
+|  Código | Explicação  |
+|---|---|
+| Função auxiliar 2| Função imprime vetores. |
+| Função compara vetores | Função compara vetores  |
+
+ 
+ Algoritmo que recebe duas structs vetor_dados como parametro e compara posição por posição qualquer inconsistência.
+ 
+ 
+|  Código | Explicação  |
+|---|---|
+|Função sequencial | função remove_par sequencial.|
+ 
+Função que recebe como parametro um tipo vetor_dados e em um laço de repetição procura por pares, caso encontrado outro laço será utilizado para organizar as posições sem esse número par encontrado.
+ 
+ 
+|  Código | Explicação  |
+|---|---|
+|Função sequencial2 | função remove_mul_cinco sequencial.|
+ 
+Funciona da mesma forma que o anterior, mas dessa vez remove os múltiplos de 5.
+ 
+ 
+|  Código | Explicação  |
+|---|---|
+|Função com thread e semaforo | função remove par com threads e semáforos.|
+ 
+ 
+ Essa função tem como o mesmo objetivo da anterior, remover os pares, a diferença aqui é o uso de threads e semáforos, para ser uma rotina da thread a gente coloca como parametro o argumento tipo void.
+ Dentro do laço, antes de verificar se o número é divisivel por 2 nós colocamos o sem_wait(&semaphore), que é a condição de parada dos semáforos.
+ Depois da verificação ocorre a condição de corrida.
+Isso é necessário pois a proxima região vai entrar na região critica também, então primeiro uma função entra, depois outra função entra, chamamos isso de exclusão mútua.
+ 
+ |  Código | Explicação  |
+|---|---|
+|Função com thread e semaforo 2 | função remove múltiplos de 5 com threads e semáforos.|
+ 
+ Funciona da mesma forma que o anterior, removendo múltiplos de 5 e garantindo a exclusão mútua graças ao sem_wait antes de entrar na região crítica e sem_post após terminar o acesso a região crítica.
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main1 | Vamos usar as funções.|
+ 
+ 
+ Definimos duas threads para o uso das rotinas remover multiplos de 5 e remover pares.
+ Definimos o tipo clock_t para calcular o tempo de execução da função sequencial e da função com uso de threads e semáforos.
+ Definimos 3 structs e seus devidos ponteiros, a primeira é para o uso das funções sequenciais, a segunda é para
+ threads com semáforos e a terceira é para o vetor comparador, para isso precisamos de um vetor_inteiros original, o original vai receber valores aleatorios com a função gera_vetor_random, e essas outras structs vão receber o vetor_original.
+ 
+ __*Resposta do desafio*__ = Teste o programa com e sem semáforos (ambos com threads), observe o resultado e explique o que está acontecendo.
+
+Caso não seja utilizado os semáforos você irá notar que em algum momento o algoritmo de compara_vetor vai apresentar inconsistencias com o vetor original, isso ocorre pois ambas threads executam as rotinas entrando na região crítica ao mesmo tempo, como o algoritmo de remover pares ou múltiplos de 5 vão verificar e remover ao mesmo tempo, em algum momento uma das funções vai analisar um caso que já tenha sido removido pelo outro, por isso a necessidade de exclusão mútua nesse cenário é vital.
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main função thread | Vamos usar as threads.|
+ 
+ Criado uma variavel t_thread_sem para pegar o timer inicial da iniciação da implementação com thread.
+ Usamos a função sem_init que inicia o semáforo, vamos aos parametros =
+ <ul><li>Endereço do semáforo.</li> <li>Valor para classificar se é compartilhado entre processos ou não (ajuda na parte 3). </li> <li> Valor inicial do semáforo.</li> </ul>
+ 
+Vamos setar o &semaphore por que declaramos no começo do programa o tipo sem_t semaphore.
+ 
+Para o segundo valor vamos colocar 0 pois não estamos trabalhando com processos ainda.
+ 
+Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na região crítica por vez.
+ 
+ 
+ criação das threads com as rotinas e o uso do pthread_join() que serve para suspender a thread chamada a não ser que ela já tenha sido terminada. É uma função útil para programas multithreading.
+ 
+ Após toda função ter sido executada o t_thread_sem recebe o valor do tempo de execução e usamos a função em baixo.
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main função sequencial| Vamos usar as funções sequenciais.|
+ 
+ Mesma ideia da implementação anterior, vamos setar o inicio do clock, chamar as funções e calcular o tempo total.
+ 
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main função sequencial| Vamos usar as funções sequenciais.|
+ 
+ 
+ Após toda implementação, mais um requisito é necessário, um algoritmo que remove em um laço de repetição pares e multiplos de 5, para depois comparar com a versão das threads. Terminando tudo o resultado esperado tem que ser 0 diferenças.
+ 
  
