@@ -9,5 +9,5 @@
 |   |   |
 
 
- O looping está pegando a string __"Thread_"__ lendo com a string __number_thread__ que tem o valor do __iterador i__ convertido para string com a função __*sprintf*__ e logo após concatena ambas strings.
+ O looping está pegando a string __Thread__ lendo com a string __number_thread__ que tem o valor do __iterador i__ convertido para string com a função __*sprintf*__ e logo após concatena ambas strings.
  Após isso usamos o __ponteiro__ para apontar o endereço que contém a __Thread_1 -> Thread_2...__
