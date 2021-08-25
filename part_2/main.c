@@ -54,6 +54,7 @@ void *compara_vetor(struct vetor_dados *vetor_inteiros_comparador, struct vetor_
     else
     {
         printf("thread -> %d sequencial -> %d\n", vetor_inteiros_comparador->tamanho, vetor_inteiros_thread_sem->tamanho);
+        return NULL;
     }
     
     printf("Foram encontrados %d diferenças entre os vetores\n", key);
@@ -190,9 +191,10 @@ int main()
     pthread_create(&thread_1, NULL, &remove_par_thread_sem, (void *)pvetor_thread_sem);
     pthread_create(&thread_2, NULL, &remove_mul_cinco_thread_sem, (void *)pvetor_thread_sem);
 
+    /*
     pthread_join(thread_1, NULL);
     pthread_join(thread_2, NULL);
-
+    */
     t_thread_sem = clock() - t_thread_sem;
 
     printf("Tempo de execucao com threads e semáforo: %lf\n", ((double)t_thread_sem) / ((CLOCKS_PER_SEC)));
