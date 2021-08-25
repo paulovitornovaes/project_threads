@@ -18,8 +18,8 @@
 
 
 Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos lá:
-
-Primeiro parametro se refere a onde a thread será armazenada, no começo do código criamos o vetor do tipo pthread para essa ocasião.
-Segundo parametro não é necessário para nossa implementação então o valor recebido é NULL
-Terceiro parametro é a rotina que a thread irá executar, como o desafio era imprimir Olá sou a thread_X iremos implementar essa função.
-Quarto parametro é referente aos argumentos que a rotina terá, obrigatoriamente a rotina é tipo void, como nossa thread é tipo string precisamos fazer um typecast para passar, chegando na rotina devemos novamente fazer o typecast, mas dessa vez o argumento deve receber type string.
+<ul>
+<li>Primeiro parametro se refere a onde a thread será armazenada, no começo do código criamos o vetor do tipo pthread para essa ocasião.</li>
+<li>Segundo parametro não é necessário para nossa implementação então o valor recebido é NULL
+<li>Terceiro parametro é a rotina que a thread irá executar, como o desafio era imprimir Olá sou a thread_X iremos implementar essa função.</li>
+<li>Quarto parametro é referente aos argumentos que a rotina terá, obrigatoriamente a rotina é tipo void, como nossa thread é tipo string precisamos fazer um typecast para passar, chegando na rotina devemos novamente fazer o typecast, mas dessa vez o argumento deve receber type string.</li></ul>
