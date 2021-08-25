@@ -11,3 +11,5 @@
 
  O looping está pegando a string __name_Thread__ lendo com a string __number_thread__ que tem o valor do __iterador i__ convertido para string com a função __*sprintf*__ e logo após concatena ambas strings.
  Após isso usamos o __ponteiro__ para apontar o endereço que contém a __Thread_1 -> Thread_2...__ finalmente o vetor com o nome da thread criado vai receber com auxilio da função strcpy, names[i] recebe o valor do ponteiro que aponta para o endereço que contém o nome da thread gerada.
+
+| ![loop1](https://github.com/paulovitornovaes/project_threads/blob/3714e7591be01c19e80d30e8982be5c875adbc85/part_1/assets/loop1_part1.png)  |   |
