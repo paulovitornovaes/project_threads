@@ -106,7 +106,7 @@ Caso não seja utilizado os semáforos você irá notar que em algum momento o a
  
  Criado uma variavel t_thread_sem para pegar o timer inicial da iniciação da implementação com thread.
  Usamos a função sem_init que inicia o semáforo, vamos aos parametros =
- <ul><li>Endereço do semáforo </li> <li>Valor para classificar se é compartilhado entre processos ou não (ajuda na parte 3) <li/>Valor inicial do semáforo<li> <li/></ul>
+ <ul><li>Endereço do semáforo.</li> <li>Valor para classificar se é compartilhado entre processos ou não (ajuda na parte 3) </li> <li> Valor inicial do semáforo</li> </ul>
  
 
  
