@@ -9,5 +9,5 @@
 |   |   |
 
 
- O looping está pegando a string "Thread_" lendo com a string number_thread que tem o valor do iterador i convertido para string com a função sprintf e logo após concatena ambas strings.
+ O looping está pegando a string <br>"Thread_"</br> lendo com a string number_thread que tem o valor do iterador i convertido para string com a função sprintf e logo após concatena ambas strings.
  Após isso usamos o ponteiro para apontar o endereço que contém a Thread_1 -> Thread_2...
