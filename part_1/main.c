@@ -52,13 +52,7 @@ int main()
     
     for (int i = 0; i < n; i++)
     {
-        //laço que vai de 0 até a quantidade de threads que o usuário desejou
-        //ponteiro que recebe o nome da thread na posição i
         char *name_to_thread = names[i];
-        //chamada da função pthread_create
-        //cria uma thread e coloca no vetor de threads
-        // a thread[i] vai executar a função rotina 
-        //name_to_thread é passado para uma função do tipo void, então tem que ser feito o casting para void
         pthread_create(&threads[i], NULL, rotina, (void *)name_to_thread);
     }
     
