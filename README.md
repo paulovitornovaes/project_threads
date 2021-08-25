@@ -109,7 +109,10 @@ Caso não seja utilizado os semáforos você irá notar que em algum momento o a
  <ul><li>Endereço do semáforo.</li> <li>Valor para classificar se é compartilhado entre processos ou não (ajuda na parte 3). </li> <li> Valor inicial do semáforo.</li> </ul>
  
 Vamos setar o &semaphore por que declaramos no começo do programa o tipo sem_t semaphore.
+ 
 Para o segundo valor vamos colocar 0 pois não estamos trabalhando com processos ainda.
+ 
 Para o terceiro valor vamos colocar 1 pois assim 1 rotina pode entrar na região crítica por vez.
+ 
  
  
