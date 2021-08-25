@@ -34,11 +34,18 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
+        //laço que vai de 0 até a quantidade de threads que o usuário desejou
+        //vetor para guardar a string thread_
         char name_thread[] = "Thread_";
+        //vetor que vai guardar os numeros gerados de cada thread no laço
         char number_thread[MAX];
+        //uso do sprintf para converter o int para char
         sprintf(number_thread, "%d", i + 1);
+        //concatenar o name_thread com number_thread
         strcat(name_thread, number_thread);
+        //criado um ponteiro com o thread_numero
         char *pnameThread = name_thread;
+        //o vetor de vetores agora recebe o nome formado
         strcpy(names[i], pnameThread);
 
     }
