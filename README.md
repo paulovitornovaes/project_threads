@@ -1,5 +1,6 @@
 # project_threads
- use of pthreads 
+ 
+ ## PARTE 1
  
  |  Código | Explicação  |
 |---|---|
@@ -26,4 +27,14 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 
  |  Código | Explicação  |
 |---|---|
-| ![rotina](https://github.com/paulovitornovaes/project_threads/blob/85ef8bbc4146fab8c147279bd8f05a586e65e11a/part_1/assets/rotina.png)| teste de explicação longa |
+| ![rotina](https://github.com/paulovitornovaes/project_threads/blob/85ef8bbc4146fab8c147279bd8f05a586e65e11a/part_1/assets/rotina.png)| <ul><li>ponteiro de string recebe o typecast char do argumento da rotina como explicado anteriormente.</li><li>Uso do pthread_self().</li><li>Uso do gettid().</li><ul> |
+
+ 
+ Aqui terão dois prints diferentes, um com uma id criada com pthread_self() que cria uma id para cada thread e pode ser reutilizado após a finalização da thread, já o gettid que é uma chamada do sistema não pode ser reutilizado.
+<br>
+<br>
+<br>
+<br>
+ 
+ ## PARTE 2
+ 
