@@ -51,5 +51,25 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |---|---|
 | Função auxiliar 2| Função imprime vetores. |
 | Função compara vetores | Função compara vetores  |
+
+ 
+ Algoritmo que recebe duas structs vetor_dados como parametro e compara posição por posição qualquer inconsistência.
  
  
+|  Código | Explicação  |
+|---|---|
+|Função sequencial | função remove_par sequencial|
+ 
+Função que recebe como parametro um tipo vetor_dados e em um laço de repetição procura por pares, caso encontrado outro laço será utilizado para organizar as posições sem esse número par encontrado.
+ 
+ 
+|  Código | Explicação  |
+|---|---|
+|Função sequencial2 | função remove_mul_cinco sequencial|
+ 
+Funciona da mesma forma que o anterior, mas dessa vez remove os múltiplos de 5.
+ 
+ 
+|  Código | Explicação  |
+|---|---|
+|Função sequencial2 | função remove_mul_cinco sequencial|
