@@ -112,7 +112,25 @@ Vamos setar o &semaphore por que declaramos no começo do programa o tipo sem_t 
  
 Para o segundo valor vamos colocar 0 pois não estamos trabalhando com processos ainda.
  
-Para o terceiro valor vamos colocar 1 pois assim 1 rotina pode entrar na região crítica por vez.
+Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na região crítica por vez.
  
+ 
+ criação das threads com as rotinas e o uso do pthread_join() que serve para suspender a thread chamada a não ser que ela já tenha sido terminada. É uma função útil para programas multithreading.
+ 
+ Após toda função ter sido executada o t_thread_sem recebe o valor do tempo de execução e usamos a função em baixo.
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main função sequencial| Vamos usar as funções sequenciais.|
+ 
+ Mesma ideia da implementação anterior, vamos setar o inicio do clock, chamar as funções e calcular o tempo total.
+ 
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main função sequencial| Vamos usar as funções sequenciais.|
+ 
+ 
+ Após toda implementação, mais um requisito é necessário, um algoritmo que remove em um laço de repetição pares e multiplos de 5, para depois comparar com a versão das threads. Terminando tudo o resultado esperado tem que ser 0 diferenças.
  
  
