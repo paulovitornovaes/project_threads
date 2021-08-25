@@ -42,17 +42,12 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |---|---|
  |![libs](https://github.com/paulovitornovaes/project_threads/blob/13547fe0819719d092839682126f262d90daa810/part_2/assets/library.png)| bibliotecas necessárias. |
  |struct |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
-
-
  | função auxiliar  | Função gera vetores. |
  
  
  Função auxiliar que vai gerar um vetor com números randomizados. estamos usando a função srand com a função time para gerar esses números.
  
- 
- | Função auxiliar 2| Função imprime vetores. |
- 
- 
- | Função compara vetores | Função compara vetores  |
+| Função auxiliar 2| Função imprime vetores. |
+| Função compara vetores | Função compara vetores  |
  
  
