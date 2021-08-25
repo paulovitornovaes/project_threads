@@ -96,9 +96,18 @@ Isso é necessário pois a proxima região vai entrar na região critica também
  Definimos 3 structs e seus devidos ponteiros, a primeira é para o uso das funções sequenciais, a segunda é para
  threads com semáforos e a terceira é para o vetor comparador, para isso precisamos de um vetor_inteiros original, o original vai receber valores aleatorios com a função gera_vetor_random, e essas outras structs vão receber o vetor_original.
  
- RESPOSTA DO DESAFIO = Teste o programa com e sem semáforos (ambos com threads), observe o resultado e explique o que está acontecendo.
+ __*Resposta do desafio*__ = Teste o programa com e sem semáforos (ambos com threads), observe o resultado e explique o que está acontecendo.
 
 Caso não seja utilizado os semáforos você irá notar que em algum momento o algoritmo de compara_vetor vai apresentar inconsistencias com o vetor original, isso ocorre pois ambas threads executam as rotinas entrando na região crítica ao mesmo tempo, como o algoritmo de remover pares ou múltiplos de 5 vão verificar e remover ao mesmo tempo, em algum momento uma das funções vai analisar um caso que já tenha sido removido pelo outro, por isso a necessidade de exclusão mútua nesse cenário é vital.
+ 
+ |  Código | Explicação  |
+|---|---|
+|int main função thread | Vamos usar as threads.|
+ 
+ Criado uma variavel t_thread_sem para pegar o timer inicial da iniciação da implementação com thread.
+ Usamos a função sem_init que inicia o semáforo, vamos aos parametros =
+ <ul><li>Endereço do semáforo </li> <li>Valor para classificar se é compartilhado entre processos ou não (ajuda na parte 3) <li/>Valor inicial do semáforo<li> <li/></ul>
+ 
 
  
  
