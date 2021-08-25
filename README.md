@@ -41,16 +41,16 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |  Código | Explicação  |
 |---|---|
  |![libs](https://github.com/paulovitornovaes/project_threads/blob/21de4ba378ac1deef6d309bd24ee7389ae2f3a30/part_2/assets/0.png)| bibliotecas necessárias. |
- |struct |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
- | função auxiliar  | Função gera vetores. |
+ |![struct](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/1.png) |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
+ | ![função auxiliar](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/2.png)  | Função gera vetores. |
  
  
  Função auxiliar que vai gerar um vetor com números randomizados. estamos usando a função srand com a função time para gerar esses números.
  
 |  Código | Explicação  |
 |---|---|
-| Função auxiliar 2| Função imprime vetores. |
-| Função compara vetores | Função compara vetores  |
+| ![Função auxiliar 2](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/3.png)| Função imprime vetores. |
+| ![Função compara vetores](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/4.png) | Função compara vetores  |
 
  
  Algoritmo que recebe duas structs vetor_dados como parametro e compara posição por posição qualquer inconsistência.
@@ -58,21 +58,21 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
  
 |  Código | Explicação  |
 |---|---|
-|Função sequencial | função remove_par sequencial.|
+|![Função sequencial](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/5.png) | função remove_par sequencial.|
  
 Função que recebe como parametro um tipo vetor_dados e em um laço de repetição procura por pares, caso encontrado outro laço será utilizado para organizar as posições sem esse número par encontrado.
  
  
 |  Código | Explicação  |
 |---|---|
-|Função sequencial2 | função remove_mul_cinco sequencial.|
+|![Função sequencial2](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/6.png) | função remove_mul_cinco sequencial.|
  
 Funciona da mesma forma que o anterior, mas dessa vez remove os múltiplos de 5.
  
  
 |  Código | Explicação  |
 |---|---|
-|Função com thread e semaforo | função remove par com threads e semáforos.|
+|![Função com thread e semaforo](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/7.png) | função remove par com threads e semáforos.|
  
  
  Essa função tem como o mesmo objetivo da anterior, remover os pares, a diferença aqui é o uso de threads e semáforos, para ser uma rotina da thread a gente coloca como parametro o argumento tipo void.
@@ -82,13 +82,13 @@ Isso é necessário pois a proxima região vai entrar na região critica também
  
  |  Código | Explicação  |
 |---|---|
-|Função com thread e semaforo 2 | função remove múltiplos de 5 com threads e semáforos.|
+|![Função com thread e semaforo 2](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/8.png) | função remove múltiplos de 5 com threads e semáforos.|
  
  Funciona da mesma forma que o anterior, removendo múltiplos de 5 e garantindo a exclusão mútua graças ao sem_wait antes de entrar na região crítica e sem_post após terminar o acesso a região crítica.
  
  |  Código | Explicação  |
 |---|---|
-|int main1 | Vamos usar as funções.|
+|![int main1](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/9.png) | Vamos usar as funções.|
  
  
  Definimos duas threads para o uso das rotinas remover multiplos de 5 e remover pares.
@@ -102,7 +102,7 @@ Caso não seja utilizado os semáforos você irá notar que em algum momento o a
  
  |  Código | Explicação  |
 |---|---|
-|int main função thread | Vamos usar as threads.|
+|![int main função thread](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/9.png) | Vamos usar as threads.|
  
  Criado uma variavel t_thread_sem para pegar o timer inicial da iniciação da implementação com thread.
  Usamos a função sem_init que inicia o semáforo, vamos aos parametros =
@@ -121,14 +121,14 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  
  |  Código | Explicação  |
 |---|---|
-|int main função sequencial| Vamos usar as funções sequenciais.|
+|![int main função sequencial](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/10.png)| Vamos usar as funções sequenciais.|
  
  Mesma ideia da implementação anterior, vamos setar o inicio do clock, chamar as funções e calcular o tempo total.
  
  
  |  Código | Explicação  |
 |---|---|
-|int main função sequencial| Vamos usar as funções sequenciais.|
+|![int main função sequencial](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/11.png)| Vamos usar as funções sequenciais.|
  
  
  Após toda implementação, mais um requisito é necessário, um algoritmo que remove em um laço de repetição pares e multiplos de 5, para depois comparar com a versão das threads. Terminando tudo o resultado esperado tem que ser 0 diferenças.
