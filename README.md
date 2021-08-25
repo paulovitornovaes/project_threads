@@ -31,7 +31,10 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 
  
  Aqui terão dois prints diferentes, um com uma id criada com pthread_self() que cria uma id para cada thread e pode ser reutilizado após a finalização da thread, já o gettid que é uma chamada do sistema não pode ser reutilizado.
- 
+<br>
+<br>
+<br>
+<br>
  
  ## PARTE 2
  
