@@ -38,3 +38,7 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
  
  ## PARTE 2
  
+|  Código | Explicação  |
+|---|---|
+ |![libs](https://github.com/paulovitornovaes/project_threads/blob/9113ad7ff76ed5e136efff7996f91407f7e98660/part_2/assets/libs.png)| bibliotecas necessárias. |
+ 
