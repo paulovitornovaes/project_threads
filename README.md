@@ -23,3 +23,7 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 <li>Segundo parametro não é necessário para nossa implementação então o valor recebido é NULL
 <li>Terceiro parametro é a rotina que a thread irá executar, como o desafio era imprimir Olá sou a thread_X iremos implementar essa função.</li>
 <li>Quarto parametro é referente aos argumentos que a rotina terá, obrigatoriamente a rotina é tipo void, como nossa thread é tipo string precisamos fazer um typecast para passar, chegando na rotina devemos novamente fazer o typecast, mas dessa vez o argumento deve receber type string.</li></ul>
+
+ |  Código | Explicação  |
+|---|---|
+| | |
