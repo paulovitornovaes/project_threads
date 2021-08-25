@@ -9,7 +9,6 @@
 void *rotina(void *arg)
 {
     char *string = (char *) arg;
-    //o argumento que foi castado para void agora tem que ser castado para string pois só assim poderemos printar o nome da thread
     printf("Print do pthread_self...\n");
     printf("Olá, eu sou a %s de id %u\n", string, pthread_self());
     printf("\n");
