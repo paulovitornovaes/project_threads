@@ -26,4 +26,4 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 
  |  Código | Explicação  |
 |---|---|
-| | |
+| ![rotina](https://github.com/paulovitornovaes/project_threads/blob/85ef8bbc4146fab8c147279bd8f05a586e65e11a/part_1/assets/rotina.png)| teste de explicação longa |
