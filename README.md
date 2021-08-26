@@ -5,7 +5,9 @@
  |  Código | Explicação  |
 |---|---|
 |![lib](https://github.com/paulovitornovaes/project_threads/blob/9a4c6c73fe0b4307746f37d7526cab76f47109b9/part_1/assets/library_part1.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+|  |  |
 |![part1](https://github.com/paulovitornovaes/project_threads/blob/9a4c6c73fe0b4307746f37d7526cab76f47109b9/part_1/assets/inputs_part1.PNG)   | <ul> <li>Inteiro n para o usuário escolher a quantidade de threads.</li> <li>Vetor que armazenará os nomes das threads geradas.</li> <li>Vetor de char para armazenar as strings geradas para posteriormente armazenar no vetor anterior.</li> </ul>  |
+| |  |
 |![loop1](https://github.com/paulovitornovaes/project_threads/blob/3714e7591be01c19e80d30e8982be5c875adbc85/part_1/assets/loop1_part1.png)| <ul> <li>Laço de repetição de 0 até a quantidade de threads que o usuário deu input.</li> <li>vetor de caracteres para armazenar a string "Thread_</li> <li>vetor de caracteres para armazenar o numero da thread</li> <li>ponteiro que aponta para o vetor name_thread</li></ul>
 |   |   |
 
@@ -41,7 +43,9 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |  Código | Explicação  |
 |---|---|
  |![libs](https://github.com/paulovitornovaes/project_threads/blob/21de4ba378ac1deef6d309bd24ee7389ae2f3a30/part_2/assets/0.png)| bibliotecas necessárias. |
+ |   |   |
  |![struct](https://github.com/paulovitornovaes/project_threads/blob/609606a018c5f5b54061e4cb809e4c2d59293dd5/part_2/assets/1.1.png) |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
+ |     |     |
  | ![função auxiliar](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/2.png)  | Função gera vetores. |
  
  
@@ -50,6 +54,7 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |  Código | Explicação  |
 |---|---|
 | ![Função auxiliar 2](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/3.png)| Função imprime vetores. |
+ |  |  |
 | ![Função compara vetores](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/4.png) | Função compara vetores  |
 
  
