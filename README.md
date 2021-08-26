@@ -37,6 +37,10 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 <br>
 <br>
 <br>
+ <br>
+ <br>
+  
+ -------
  
  ## PARTE 2
  
@@ -138,4 +142,12 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  
  Após toda implementação, mais um requisito é necessário, um algoritmo que remove em um laço de repetição pares e multiplos de 5, para depois comparar com a versão das threads. Terminando tudo o resultado esperado tem que ser 0 diferenças.
  
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
  
+ -------
+ 
+ ## Parte 3
