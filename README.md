@@ -151,3 +151,16 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  -------
  
  ## Parte 3
+ 
+ |  Código | Explicação  |
+|---|---|
+|![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/0.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+|  |  |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/1.png)|<ul> <li>macro do máximo valor</li> <li>struct do tipo shmid_ds</li> <li>struct do tipo vetor_dados</li></ul> |
+|  |  |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/2.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+|  |  |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/3.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+|  |  |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/4.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+|  |  |
