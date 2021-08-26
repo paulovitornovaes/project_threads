@@ -41,7 +41,7 @@ Aqui necessitamos explicar melhor como funciona a função pthread_create, vamos
 |  Código | Explicação  |
 |---|---|
  |![libs](https://github.com/paulovitornovaes/project_threads/blob/21de4ba378ac1deef6d309bd24ee7389ae2f3a30/part_2/assets/0.png)| bibliotecas necessárias. |
- |![struct](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/1.png) |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
+ |![struct](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/1.1.png) |<ul> <li>struct vetor_dados.</li><li>vetor com tamanho definido MAX.</li><li>inteiro indicando tamanho.</li><ul> |
  | ![função auxiliar](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/2.png)  | Função gera vetores. |
  
  
