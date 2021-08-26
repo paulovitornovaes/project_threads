@@ -166,7 +166,7 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
 |---|---|
  |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/2.png)|<ul> <li>executando as funções no int main().</li></ul> |
 |  |  |
- |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/3.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/3.png)|<ul> <li>Uso da memória compartilhada.</li></ul> |
 |  |  |
  
  Aqui começamos criando a área da memória compartilhada.
@@ -182,7 +182,7 @@ Sobre as flags, são elas que definem os direitos de acesso a essa memória comp
 
  |  Código | Explicação  |
 |---|---|
- |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/4.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/4.png)|<ul> <li>Uso do fork().</li></ul> |
 |  |  |
  
  Criamos o id anteriormente para usar a função fork agora.
