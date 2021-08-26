@@ -174,7 +174,7 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  <ul> <li>Primeiro parametro diz sobre a key mencionada anteriormente</li> <li>Segundo parametro diz sobre o tamanho alocado para a memória compartilhada.</li> <li>Terceiro parametro é sobre as flags</li> </ul>
  
  
-Sobre as flags, que define os direitos de acesso a essa memória compartilhada, se a flag for privada = 0, apenas o processo proprietário utilize-a, eu utilizei a IPC_CREAT para criar o segmento, a IPC_EXCL para assegurar a criação do segmento.
+Sobre as flags, são elas que definem os direitos de acesso a essa memória compartilhada, se a flag for privada = 0, apenas o processo proprietário vai poder utilizar ela. Utilizei a IPC_CREAT para criar o segmento, a IPC_EXCL para assegurar a criação do segmento e 0600 significa read and write, nós precisamos ler cada valor dos indices para saber se precisamos remover.
 
  |  Código | Explicação  |
 |---|---|
