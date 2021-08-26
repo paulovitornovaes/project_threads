@@ -6,7 +6,6 @@
 #include <sys/shm.h>
 #include <sys/wait.h>
 #include <sys/ipc.h>
-//#include <math.h>
 
 #define MAX 100000
 
@@ -141,7 +140,6 @@ int main()
 
     gera_vetor_random(vetor_inteiros.vetor);
 
-    //Fazendo uma cópia do vetor_inteiros para vetor que vamos usar sem processos
     struct vetor_dados *compara_vetor_inteiros;
     compara_vetor_inteiros = &vetor_inteiros;
 
@@ -151,8 +149,7 @@ int main()
 
     // -------------------- Uso da memória compartilhada ----------------- //
 
-    int shmid = shmget(0, 100000 * sizeof(int), 0666 | IPC_CREAT); //criado a área da memória compartilhada com key 0 / área alocada foi de 100000 pensado para tamanho do inteiro
-    // EXPLICAR FLAGS 0666 IPC_CREAT
+    int shmid = shmget(0, 100000 * sizeof(int), 0666 | IPC_CREAT); 
 
     if (shmid < 0)
     {
@@ -160,10 +157,8 @@ int main()
     }
 
     struct vetor_dados *compartilhado = shmat(shmid, NULL, 0);
-    //criando a struct vetor_dados para receber esse espaço de memória partilhada
 
     *compartilhado = vetor_inteiros;
-    //meu struct vetor_inteiros está agora na área da memória partilhada
 
     int id;
 
