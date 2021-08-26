@@ -151,3 +151,52 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  -------
  
  ## Parte 3
+ 
+ |  Código | Explicação  |
+|---|---|
+|![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/0.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
+|  |  |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/1.png)|<ul> <li>macro do máximo valor</li> <li>struct do tipo shmid_ds</li> <li>struct do tipo vetor_dados</li></ul> |
+|  |  |
+ 
+ 
+ Para essa terceira parte a gente usa as mesmas funções da parte 2, a diferença é que vamos usar processos dessa vez.
+ 
+ |  Código | Explicação  |
+|---|---|
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/2.png)|<ul> <li>executando as funções no int main().</li></ul> |
+|  |  |
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/3.png)|<ul> <li>Uso da memória compartilhada.</li></ul> |
+|  |  |
+ 
+ Aqui começamos criando a área da memória compartilhada.
+ O shmget() retorna o identificador do segmento da memória compartilhada associado com a key escolhida no primeiro parametro.
+ <ul> <li>Primeiro parametro diz sobre a key mencionada anteriormente</li> <li>Segundo parametro diz sobre o tamanho alocado para a memória compartilhada.</li> <li>Terceiro parametro é sobre as flags</li> </ul>
+ 
+ 
+Sobre as flags, são elas que definem os direitos de acesso a essa memória compartilhada, se a flag for privada = 0, apenas o processo proprietário vai poder utilizar ela. Utilizei a IPC_CREAT para criar o segmento, a IPC_EXCL para assegurar a criação do segmento e 0600 significa read and write, nós precisamos ler cada valor dos indices para saber se precisamos remover.
+ 
+<br>
+ 
+ O shmat anexa essa memória compartilhada ao ponteiro tipo vetor_dados, depois disso essa memória compartilhada recebe o vetor com os numeros randomizados já escritos.
+
+ |  Código | Explicação  |
+|---|---|
+ |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/4.png)|<ul> <li>Uso do fork().</li></ul> |
+|  |  |
+ 
+ Criamos o id anteriormente para usar a função fork agora.
+ 
+ O primeiro if cria o fork, se o id do fork for menor que zero quer dizer que houve um erro na criação do fork.
+ 
+ Se of fork funcionar precisamos criar um if caso seja o processo pai ou filho.
+
+ Se id == 0 quer dizer que estamos no processo filho, já se for maior que zero o processo é o pai.
+ 
+ Para garantir a exclusão mútua entre processo pai e processo filho, o processo pai vai receber um wait(NULL) que significa que o processo pai vai esperar o processo filho finalizar.
+ 
+ Processo pai remove multiplos de 5 e ainda compara vetor.
+ 
+ Último if serve para destruir o espaço de memória compartilhada, se não funcionar vamos receber o erro "main : shmctl: ".
+ 
+ Com isso finalizamos o trabalho de Sistemas Operacionais.
