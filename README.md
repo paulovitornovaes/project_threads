@@ -173,7 +173,10 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  O shmget() retorna o identificador do segmento da memória compartilhada associado com a key escolhida no primeiro parametro.
  <ul> <li>Primeiro parametro diz sobre a key mencionada anteriormente</li> <li>Segundo parametro diz sobre o tamanho alocado para a memória compartilhada.</li> <li>Terceiro parametro é sobre as flags</li> </ul>
  
-Sobre as flags, que define os direitos de acesso a essa memória compartilhada, se a flag for privada = 0, apenas o processo proprietário utilize-a, eu utilizei a IPC_CREAT para criar o segmento, a IPC_EXCL para assegurar a criação do segmento.
  
+Sobre as flags, que define os direitos de acesso a essa memória compartilhada, se a flag for privada = 0, apenas o processo proprietário utilize-a, eu utilizei a IPC_CREAT para criar o segmento, a IPC_EXCL para assegurar a criação do segmento.
+
+ |  Código | Explicação  |
+|---|---|
  |![lib](https://github.com/paulovitornovaes/project_threads/blob/8eceeeddca9ddea337ffcac8505b02bc79ae266a/part_3/assets/4.png)|<ul> <li>Bibliotecas necessárias. </li></ul> |
 |  |  |
