@@ -149,7 +149,7 @@ int main()
 
     // -------------------- Uso da memória compartilhada ----------------- //
 
-    int shmid = shmget(0, 100000 * sizeof(int), 0666 | IPC_CREAT); 
+    int shmid = shmget(0, 100000 * sizeof(int), 0600 | IPC_CREAT | IPC_EXCL); 
 
     if (shmid < 0)
     {
@@ -185,6 +185,7 @@ int main()
     {
         perror("main: shmctl: ");
     }
+
 
     return 0;
 }
