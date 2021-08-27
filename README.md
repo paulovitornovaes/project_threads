@@ -109,6 +109,9 @@ Isso é necessário pois a proxima região vai entrar na região critica também
 
 Caso não seja utilizado os semáforos você irá notar que em algum momento o algoritmo de compara_vetor vai apresentar inconsistencias com o vetor original, isso ocorre pois ambas threads executam as rotinas entrando na região crítica ao mesmo tempo, como o algoritmo de remover pares ou múltiplos de 5 vão verificar e remover ao mesmo tempo, em algum momento uma das funções vai analisar um caso que já tenha sido removido pelo outro, por isso a necessidade de exclusão mútua nesse cenário é vital.
  
+ 
+ A implementação com thread e semáforo é mais lenta pois o semáforo faz chamada de sistema, então em um laço de repetição com um semáforo voce vai perder velocidade mas garantindo assim a exclusão mútua.
+ 
  |  Código | Explicação  |
 |---|---|
 |![int main função thread](https://github.com/paulovitornovaes/project_threads/blob/ca0a4012cf1e4b61c5d31f4dcf595f301c92b942/part_2/assets/9.png) | Vamos usar as threads.|
@@ -141,6 +144,7 @@ Para o terceiro valor vamos colocar 1 pois assim uma rotina pode entrar na regi�
  
  
  Após toda implementação, mais um requisito é necessário, um algoritmo que remove em um laço de repetição pares e multiplos de 5, para depois comparar com a versão das threads. Terminando tudo o resultado esperado tem que ser 0 diferenças.
+ 
  
  <br>
  <br>
