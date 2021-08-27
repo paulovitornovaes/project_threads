@@ -4,7 +4,6 @@
 #include <time.h>
 #include <semaphore.h>
 #define MAX 100000
-
 sem_t semaphore;
 
 struct vetor_dados
@@ -17,13 +16,18 @@ struct vetor_dados
 
 void *gera_vetor_random(int *vetor_inteiros)
 {
+    //chamada do srand para auxiliar na criação de numeros randomicos
     srand(time(NULL));
+    //looping de indice 0 até o valor MAX
 
     for (int i = 0; i < MAX; i++)
     {
+        //vetor de inteiros recebe o numero aleatorio de 0 a 100
         vetor_inteiros[i] = rand() % 100 + 1;
 
+        //printf("[%d]\n", vetor_inteiros[i]);
     }
+    //printf("\n");
 
     return NULL;
 }
@@ -48,15 +52,11 @@ void *compara_vetor(struct vetor_dados *vetor_inteiros_comparador, struct vetor_
             if (vetor_inteiros_comparador->vetor[i] != vetor_inteiros_thread_sem->vetor[i])
             {
                 key += 1;
+                printf("thread -> %d sequencial -> %d\n", vetor_inteiros_comparador->tamanho, vetor_inteiros_thread_sem->tamanho);
             }
         }
     }
-    else
-    {
-        printf("thread -> %d sequencial -> %d\n", vetor_inteiros_comparador->tamanho, vetor_inteiros_thread_sem->tamanho);
-        return NULL;
-    }
-    
+
     printf("Foram encontrados %d diferenças entre os vetores\n", key);
 
     return NULL;
@@ -64,14 +64,13 @@ void *compara_vetor(struct vetor_dados *vetor_inteiros_comparador, struct vetor_
 
 // --------------------------------------------------------- //
 
-
-
 //                         FUNÇÕES SEQUENCIAIS                //
 
 void *remove_par(struct vetor_dados *vetor_inteiros)
 {
     int maximo = vetor_inteiros->tamanho;
 
+    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         if (vetor_inteiros->vetor[i] % 2 == 0)
@@ -91,6 +90,7 @@ void *remove_par(struct vetor_dados *vetor_inteiros)
 void *remove_mul_cinco(struct vetor_dados *vetor_inteiros)
 {
     int maximo = vetor_inteiros->tamanho;
+    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         if (vetor_inteiros->vetor[i] % 5 == 0)
@@ -110,14 +110,13 @@ void *remove_mul_cinco(struct vetor_dados *vetor_inteiros)
 
 // --------------------------------------------------------- //
 
-
-
 //FUNÇÕES COM USO DE THREAD E SEMÁFORO //
 
 void *remove_par_thread_sem(void *arg)
 {
     struct vetor_dados *arg_dados = (struct vetor_dados *)arg;
     int maximo = arg_dados->tamanho;
+    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         sem_wait(&semaphore);
@@ -139,6 +138,7 @@ void *remove_mul_cinco_thread_sem(void *arg)
 {
     struct vetor_dados *arg_dados = (struct vetor_dados *)arg;
     int maximo = arg_dados->tamanho;
+    //looping reverso
     for (int i = maximo - 1; i >= 0; i--)
     {
         sem_wait(&semaphore);
@@ -159,12 +159,13 @@ void *remove_mul_cinco_thread_sem(void *arg)
 }
 // ---------------------------------- //
 
-
 int main()
 {
+    //criação das threads, set do tempo, copia do struct e passagem do ponteiro
     pthread_t thread_1, thread_2;
     clock_t t_sequencial, t_thread_sem;
 
+    //cria todas structs
     struct vetor_dados vetor_inteiros;
     vetor_inteiros.tamanho = MAX;
     struct vetor_dados *pvetor_original = &vetor_inteiros;
@@ -182,19 +183,19 @@ int main()
 
     printf("Caso necessite de imprimir os valores, use a função imprime_vetor()\nIniciando programa...\n");
 
-
     //                  IMPLEMENTAÇÃO THREAD - SEMAFORO                     //
 
     t_thread_sem = clock();
 
+    //chamada das funções
     sem_init(&semaphore, 0, 1);
     pthread_create(&thread_1, NULL, &remove_par_thread_sem, (void *)pvetor_thread_sem);
     pthread_create(&thread_2, NULL, &remove_mul_cinco_thread_sem, (void *)pvetor_thread_sem);
 
-    
+    //o join força a chamada da thread terminar, caso contrario os ultimos indices de vetores nao serao checados se são pares ou mul de 5
     pthread_join(thread_1, NULL);
     pthread_join(thread_2, NULL);
-    
+
     t_thread_sem = clock() - t_thread_sem;
 
     printf("Tempo de execucao com threads e semáforo: %lf\n", ((double)t_thread_sem) / ((CLOCKS_PER_SEC)));
@@ -205,9 +206,11 @@ int main()
 
     //                  IMPLEMENTAÇÃO SEQUENCIAL                           //
 
+    //set do tempo do sequencial
 
     t_sequencial = clock();
 
+    //chamada das funções
     remove_par(pvetor_sequencial);
     remove_mul_cinco(pvetor_sequencial);
 
@@ -217,8 +220,7 @@ int main()
 
     sem_destroy(&semaphore);
 
-
-
+    // VARRER OS PARES E MULTIPLOS DE 5 DO COMEÇO AO FIM
     for (int i = 0; i < vetor_comparador.tamanho; i++)
     {
         if (vetor_comparador.vetor[i] % 2 == 0 || vetor_comparador.vetor[i] % 5 == 0)
@@ -232,7 +234,6 @@ int main()
         }
     }
 
-    
     compara_vetor(pvetor_comparador, pvetor_thread_sem);
 
     return 0;
