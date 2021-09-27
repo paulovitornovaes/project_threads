@@ -175,7 +175,6 @@ int main()
     }
     else
     {
-
         wait(NULL);
         remove_mul_cinco(compartilhado);
         compara_vetor(compartilhado, compara_vetor_inteiros);
@@ -185,7 +184,6 @@ int main()
     {
         perror("main: shmctl: ");
     }
-
 
     return 0;
 }
